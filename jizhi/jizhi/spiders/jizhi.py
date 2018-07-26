@@ -13,7 +13,7 @@ class Jizhi(scrapy.Spider):
         'http://www.baidu.com/s?{}'.format(arg)
     ]
 
-    #counter = 0
+    counter = 0
 
     def parse(self, response):
 
@@ -24,18 +24,17 @@ class Jizhi(scrapy.Spider):
                 'title':result.extract()
             }
 
-        #Jizhi.counter +=1
+        Jizhi.counter +=1
 
         # next_page:css('a.n')
 
-        #if Jizhi.counter == 5: return        
+        if Jizhi.counter == 5: return        
 
-        #yield response.css('a.n::attr(href)')
-'''
+        next_page = response.css('a.n::attr(href)')
+
         if len(next_page) == 2:
             next_page_url = next_page[1].extract()
         else:
             next_page_url = next_page.extract_first()
 
         yield scrapy.Request(self.base_urls + next_page_url, callback=self.parse)
-'''
